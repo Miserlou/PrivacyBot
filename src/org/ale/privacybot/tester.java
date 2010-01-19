@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class tester extends Activity {
     /** Called when the activity is first created. */
@@ -21,18 +22,29 @@ public class tester extends Activity {
         setContentView(R.layout.main);
         
 		checkInstall();
+		TextView t = (TextView)findViewById(R.id.out);
 		
 		Process p;
 		try {
-			p = Runtime.getRuntime().exec("/data/data/org.ale.privacybot/gpg --homedir /data/data/org.ale.privacybot/gpg/.gpg/ --gen-key");
+			p = Runtime.getRuntime().exec("/data/data/org.ale.privacybot/gpgx --homedir=/data/data/org.ale.privacybot/.gpg --gen-key");
+			//p.waitFor();
 			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			BufferedReader er = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 			StringBuffer sb = new StringBuffer();
-			String line;
+			String line = null;
+			while ((line = er.readLine()) != null) {
+				  sb.append(line).append("\n");
+				}
+			System.out.println(sb.toString());
+			sb = new StringBuffer();
+			line = null;
 			while ((line = br.readLine()) != null) {
 			  sb.append(line).append("\n");
 			}
 			String answer = sb.toString();
+			System.out.println("Asdf");
 			System.out.println(answer);
+			t.setText(answer);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,10 +164,10 @@ public class tester extends Activity {
 			// This took me a WHOLE FUCKING DAY of hacking to figure out a solution
 			// GodfuckingDAMMIT
 			// It also takes quite a long time to copy the file so users should be told to wait patiently
+			doCommand("/system/bin/mkdir", "/data/data/org.ale.privacybot/.gpg", "");
 			copyAsset("gpgx.mp3");
 			doCommand("/system/bin/mv", "/data/data/org.ale.privacybot/gpgx.mp3", "/data/data/org.ale.privacybot/gpgx");
 			doCommand("/system/bin/chmod", "777", "/data/data/org.ale.privacybot/gpgx");
-			doCommand("/system/bin/mkdir", "/data/data/org.ale.privacybot/gpg/.gpg/", "");
 			copyAsset("version.txt");
 		}
 	}
