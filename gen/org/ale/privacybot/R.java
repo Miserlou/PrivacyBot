@@ -12,38 +12,133 @@ public final class R {
     }
     public static final class drawable {
         public static final int bg=0x7f020000;
-        public static final int icon=0x7f020001;
+        public static final int ic_launcher_folder=0x7f020001;
+        public static final int ic_launcher_folder_open=0x7f020002;
+        public static final int ic_launcher_home=0x7f020003;
+        public static final int ic_launcher_home_small=0x7f020004;
+        public static final int ic_menu_back_small=0x7f020005;
+        public static final int ic_menu_forward_small=0x7f020006;
+        public static final int icon=0x7f020007;
+        public static final int icon_file=0x7f020008;
+        public static final int icon_sdcard=0x7f020009;
+        public static final int icon_sdcard_small=0x7f02000a;
     }
     public static final class id {
-        public static final int email=0x7f050009;
-        public static final int import_key=0x7f050007;
-        public static final int install=0x7f050000;
-        public static final int install_done=0x7f050001;
-        public static final int keymanager=0x7f05000a;
-        public static final int my_key=0x7f050003;
-        public static final int new_key=0x7f050005;
-        public static final int out=0x7f050002;
-        public static final int s1=0x7f050004;
-        public static final int s2=0x7f050006;
-        public static final int txt=0x7f050008;
+        public static final int button1=0x7f060005;
+        public static final int button2=0x7f060006;
+        public static final int button_directory_pick=0x7f06000a;
+        public static final int button_pick=0x7f06000c;
+        public static final int container2=0x7f060004;
+        public static final int directory_buttons=0x7f060007;
+        public static final int directory_input=0x7f060008;
+        public static final int directory_text=0x7f060009;
+        public static final int email=0x7f06001b;
+        public static final int empty=0x7f06000d;
+        public static final int empty_text=0x7f06000e;
+        public static final int filename=0x7f06000b;
+        public static final int foldername=0x7f060001;
+        public static final int foldernametext=0x7f060000;
+        public static final int icon=0x7f060010;
+        public static final int import_key=0x7f060019;
+        public static final int info=0x7f060011;
+        public static final int install=0x7f060012;
+        public static final int install_done=0x7f060013;
+        public static final int keymanager=0x7f06001c;
+        public static final int my_key=0x7f060015;
+        public static final int new_key=0x7f060017;
+        public static final int out=0x7f060014;
+        public static final int s1=0x7f060016;
+        public static final int s2=0x7f060018;
+        public static final int scan_progress=0x7f06000f;
+        public static final int text=0x7f060003;
+        public static final int text1=0x7f060002;
+        public static final int txt=0x7f06001a;
     }
     public static final class layout {
-        public static final int installer=0x7f030000;
-        public static final int key_management=0x7f030001;
-        public static final int main=0x7f030002;
+        public static final int dialog_new_folder=0x7f030000;
+        public static final int eula=0x7f030001;
+        public static final int faq=0x7f030002;
+        public static final int filelist=0x7f030003;
+        public static final int filelist_item=0x7f030004;
+        public static final int installer=0x7f030005;
+        public static final int key_management=0x7f030006;
+        public static final int main=0x7f030007;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int blank=0x7f040008;
-        public static final int button_email=0x7f040006;
-        public static final int button_import_key=0x7f04000b;
-        public static final int button_manage_keys=0x7f040007;
-        public static final int button_my_key=0x7f040009;
-        public static final int button_new_key=0x7f04000a;
-        public static final int button_txt=0x7f040005;
-        public static final int hello=0x7f040000;
-        public static final int install_done=0x7f040004;
-        public static final int installing=0x7f040003;
-        public static final int pbt=0x7f040002;
+        /**  About 
+         */
+        public static final int about=0x7f05003c;
+        public static final int about_comments=0x7f05000c;
+        public static final int about_website_label=0x7f05000d;
+        public static final int aboutapp_get=0x7f05003e;
+        public static final int aboutapp_not_available=0x7f05003d;
+        public static final int app_name=0x7f050001;
+        public static final int application_not_available=0x7f050031;
+        public static final int blank=0x7f050008;
+        public static final int button_email=0x7f050006;
+        public static final int button_import_key=0x7f05000b;
+        public static final int button_manage_keys=0x7f050007;
+        public static final int button_my_key=0x7f050009;
+        public static final int button_new_key=0x7f05000a;
+        public static final int button_txt=0x7f050005;
+        public static final int copied_file_name=0x7f050025;
+        public static final int copied_file_name_2=0x7f050026;
+        public static final int copy_button=0x7f050024;
+        public static final int copy_title=0x7f050023;
+        public static final int create_new_folder=0x7f050015;
+        public static final int error_copying_file=0x7f05002e;
+        public static final int error_creating_new_folder=0x7f050027;
+        public static final int error_deleting_file=0x7f050028;
+        public static final int error_file_does_not_exists=0x7f05002f;
+        public static final int error_folder_not_empty=0x7f050029;
+        public static final int error_moving_file=0x7f05002c;
+        public static final int error_moving_folder=0x7f05002d;
+        public static final int error_renaming_file=0x7f05002a;
+        public static final int error_renaming_folder=0x7f05002b;
+        public static final int eula_accept=0x7f050035;
+        public static final int eula_refuse=0x7f050036;
+        /**  ***************************
+	     Distribution
+	     *************************** 
+ EULA 
+         */
+        public static final int eula_title=0x7f050034;
+        public static final int faq=0x7f050032;
+        public static final int faq_msg=0x7f050033;
+        public static final int file_copied=0x7f050020;
+        public static final int file_deleted=0x7f05001a;
+        public static final int file_moved=0x7f05001e;
+        public static final int file_name=0x7f050017;
+        public static final int file_renamed=0x7f05001c;
+        public static final int folder_deleted=0x7f05001b;
+        public static final int folder_moved=0x7f05001f;
+        public static final int folder_name=0x7f050016;
+        public static final int folder_renamed=0x7f05001d;
+        public static final int hello=0x7f050000;
+        public static final int install_done=0x7f050004;
+        public static final int installing=0x7f050003;
+        public static final int menu_copy=0x7f050014;
+        public static final int menu_delete=0x7f05000f;
+        public static final int menu_move=0x7f050013;
+        public static final int menu_new_folder=0x7f05000e;
+        public static final int menu_open=0x7f050012;
+        public static final int menu_rename=0x7f050010;
+        public static final int menu_send=0x7f050011;
+        public static final int move_button=0x7f050022;
+        public static final int move_title=0x7f050021;
+        public static final int pbt=0x7f050002;
+        public static final int really_delete=0x7f050019;
+        public static final int send_not_available=0x7f050030;
+        public static final int this_folder_is_empty=0x7f050018;
+        public static final int update=0x7f05003b;
+        /**  Update 
+         */
+        public static final int update_box_text=0x7f050037;
+        public static final int update_check_now=0x7f050038;
+        public static final int update_error=0x7f05003a;
+        public static final int update_get_updater=0x7f050039;
+    }
+    public static final class xml {
+        public static final int mimetypes=0x7f040000;
     }
 }
