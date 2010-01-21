@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, tester!</string>
     <string name="app_name">privacyBot</string>
+    <string name="installing">\n\nPlease wait while data is installed. This may take some time, but it will only happen this one time. \n\nThank you for your patience!</string>
+	<string name="install_done">\n\n\n\n\nOkay, Done!</string>
+	
 </resources>

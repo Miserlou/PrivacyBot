@@ -10,49 +10,48 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class tester extends Activity {
+	
+	SharedPreferences prefs;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        //no title bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
         setContentView(R.layout.main);
         
-		checkInstall();
-		TextView t = (TextView)findViewById(R.id.out);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final SharedPreferences.Editor editor = prefs.edit();
+        String data = prefs.getString("binary_data", "0");
+        
+        // XXX: REMOVE FOR PRODUCTION
+        System.out.println("binary_data is");
+        System.out.println(data);
+        data = "0";
+        
+        if(data != "1"){
+        	launchInstaller();
+        }
 		
-		Process p;
-		try {
-			p = Runtime.getRuntime().exec("/data/data/org.ale.privacybot/gpgx --homedir=/data/data/org.ale.privacybot/.gpg --gen-key");
-			//p.waitFor();
-			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			BufferedReader er = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-			StringBuffer sb = new StringBuffer();
-			String line = null;
-			while ((line = er.readLine()) != null) {
-				  sb.append(line).append("\n");
-				}
-			System.out.println(sb.toString());
-			sb = new StringBuffer();
-			line = null;
-			while ((line = br.readLine()) != null) {
-			  sb.append(line).append("\n");
-			}
-			String answer = sb.toString();
-			System.out.println("Asdf");
-			System.out.println(answer);
-			t.setText(answer);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		//opposite is outputstreamwriter
-		
+    }
+    
+    public void launchInstaller(){
+    	Intent install = new Intent(tester.this, Installer.class);
+    	startActivity(install);
     }
     
     public void doCommand(String command, String arg0, String arg1)
