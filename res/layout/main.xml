@@ -8,7 +8,55 @@
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="@string/hello"
+    android:text="@string/pbt"
     android:id="@+id/out"
+    	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:gravity="center"
     />
+    
+    		    <Button
+    		    android:textAppearance="?android:attr/textAppearanceMedium"
+		        android:id="@+id/txt"
+		        android:text="@string/button_txt"
+            	android:layout_gravity="center"
+				android:layout_width="220dip" 
+    			android:layout_height="70dip"
+    			android:padding="20dip" />
+    			
+    			<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/blank"
+    android:id="@+id/s1"
+    	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:gravity="center"
+    />
+            	
+            			    <Button
+		        android:id="@+id/email"
+            	android:textAppearance="?android:attr/textAppearanceMediumInverse"
+		        android:text="@string/button_email"
+            	android:layout_gravity="center"
+				android:layout_width="220dip" 
+    			android:layout_height="70dip"
+    			android:padding="20dip" />
+    			
+    			    			<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/blank"
+    android:id="@+id/s2"
+    	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:gravity="center"
+    />
+            	
+            			    <Button
+		        android:id="@+id/keymanager"
+            	android:textAppearance="?android:attr/textAppearanceMediumInverse"
+		        android:text="@string/button_manage_keys"
+            	android:layout_gravity="center"
+				android:layout_width="220dip" 
+    			android:layout_height="70dip"
+    			android:padding="20dip"  />
+            	
 </LinearLayout>
