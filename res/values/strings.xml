@@ -9,5 +9,8 @@
 	<string name="button_email">Email</string>
 	<string name="button_manage_keys">Key Management</string>
 	<string name="blank"></string>
+	<string name="button_my_key">My Key</string>
+	<string name="button_new_key">New Key</string>
+	<string name="button_import_key">Import Key</string>
 	
 </resources>

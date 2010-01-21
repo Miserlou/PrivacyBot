@@ -14,10 +14,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class tester extends Activity {
 	
@@ -49,6 +53,21 @@ public class tester extends Activity {
 		
     }
     
+    @Override
+    public void onStart(){
+    	super.onStart();
+    	Button b1 = (Button)findViewById(R.id.txt);
+    	Button b2 = (Button)findViewById(R.id.email);
+    	Button b3 = (Button)findViewById(R.id.keymanager);
+    	
+        b3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	Intent km = new Intent(tester.this, KeyManagement.class);
+            	startActivity(km);
+            }
+        });
+    }
+
     public void launchInstaller(){
     	Intent install = new Intent(tester.this, Installer.class);
     	startActivity(install);
