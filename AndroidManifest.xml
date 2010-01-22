@@ -15,6 +15,18 @@
         <activity android:name=".Installer" />
         <activity android:name=".KeyManagement" />
         
+        <activity android:name=".KeyImporter">
+			<intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                            <category android:name="android.intent.category.DEFAULT" />
+                            <category android:name="android.intent.category.BROWSABLE" />
+                            <data android:scheme="file" /> 
+                			<data android:mimeType="application/gpg-keys" />
+                			<data android:mimeType="*/*"/>
+                			<data android:pathPattern=".*\\.key" />
+            </intent-filter> 
+		</activity>
+        
 
 		<activity android:name="org.openintents.filemanager.FileManagerActivity" android:label="@string/app_name">
         </activity>
