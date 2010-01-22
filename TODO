@@ -1,0 +1,9 @@
+TODO:
+
+	Gen-key is requiring a TTY - this either needs to be hacked around,
+		but I'd rather do this with real JNI if it needs fucking with anyway
+	Entropy - can't generate enough of it
+	
+	Key importer - this is a good starting point
+	UI
+	blah

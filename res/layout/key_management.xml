@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/pbt"
+    android:id="@+id/out"
+    	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:gravity="center"
+    />
+    
+    		    <Button
+    		    android:textAppearance="?android:attr/textAppearanceMedium"
+		        android:id="@+id/my_key"
+		        android:text="@string/button_my_key"
+            	android:layout_gravity="center"
+				android:layout_width="220dip" 
+    			android:layout_height="70dip"
+    			android:padding="20dip" />
+    			
+    			<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/blank"
+    android:id="@+id/s1"
+    	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:gravity="center"
+    />
+            	
+            			    <Button
+		        android:id="@+id/new_key"
+            	android:textAppearance="?android:attr/textAppearanceMediumInverse"
+		        android:text="@string/button_new_key"
+            	android:layout_gravity="center"
+				android:layout_width="220dip" 
+    			android:layout_height="70dip"
+    			android:padding="20dip" />
+    			
+    			    			<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/blank"
+    android:id="@+id/s2"
+    	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:gravity="center"
+    />
+            	
+            			    <Button
+		        android:id="@+id/import_key"
+            	android:textAppearance="?android:attr/textAppearanceMediumInverse"
+		        android:text="@string/button_import_key"
+            	android:layout_gravity="center"
+				android:layout_width="220dip" 
+    			android:layout_height="70dip"
+    			android:padding="20dip"  />
+            	
+</LinearLayout>
