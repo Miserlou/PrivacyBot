@@ -57,23 +57,5 @@ public class KeyImporter extends Activity {
     public void importKey(){
     	GPG.importKey(uri.getPath());
     }
-    
-    public void doCommand(String command, String arg0, String arg1)
-	{
-		try
-		{
-				String fullCmd = command + " " + arg0 + " " + arg1;
-				Process p = Runtime.getRuntime().exec(fullCmd);
-				p.waitFor();
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e.getMessage());
-		}
-		catch (InterruptedException e)
-		{
-			throw new RuntimeException(e.getMessage());
-		}
-	}
 
 }
