@@ -43,7 +43,9 @@ public class GPG{
 	}
 	
 	public static String importKey(String str){
-		String x = base + "--allow-secret-key-import --import " + str;
+		// XXX: Note - that allow nonselfsigned thing is a hack. Should be removed
+		// when I can figure out why it thinks self signed keys aren't.
+		String x = base + "--allow-secret-key-import --allow-non-selfsigned-uid --import " + str;
 		return execute(x);
 	}
 	
