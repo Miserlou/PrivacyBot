@@ -53,16 +53,41 @@ public class GPG{
 	public static ArrayList<KeyInfo> getKeyList(){
 		// XXX: This needs to work for all keys, not just the first one
 		
+		String[] secar;
+		String bytes;
+		String fprint;
+		String date;
+		String namecommentemail;
+		
 		ArrayList <KeyInfo> al = new ArrayList<KeyInfo>();
 		String x = base + "--list-secret-keys --with-colons";
 		String sec = execute(x);
-		String[] secar = sec.split(":");
-		String bytes = secar[1];
-		String fprint = secar[4];
-		String date = secar[5];
-		String namecommentemail=secar[9];
-		KeyInfo ki = new KeyInfo(bytes,fprint,date,namecommentemail);
-		al.add(ki);
+		
+		String[] keys = sec.split("\r\n|\r|\n");
+		
+		for(int i=0; i<keys.length; i++){
+			secar = sec.split(":");
+			System.out.println("Secar0");
+			System.out.println(secar[0]);
+			System.out.println("Secar1");
+			System.out.println(secar[1]);
+			System.out.println("Secar2");
+			System.out.println(secar[2]);
+			System.out.println("Secar3");
+			System.out.println(secar[3]);
+			System.out.println("Secar4");
+			System.out.println(secar[4]);
+			System.out.println("Secar5");
+			System.out.println(secar[5]);
+			if(secar[0].contains("pub") || secar[0].contains("sec")){
+				System.out.println("Whoah");
+				bytes = secar[2];
+				fprint = secar[4];
+				date = secar[5];
+				namecommentemail=secar[9];
+				al.add(new KeyInfo(bytes,fprint,date,namecommentemail));
+			}
+		}
 		
 		return al;
 	}
