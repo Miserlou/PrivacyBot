@@ -35,7 +35,9 @@ public class TextMenuActivity extends Activity {
     	
         b1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	startActivity(new Intent(TextMenuActivity.this, KeyInfoListViewActivity.class));
+            	Intent i = new Intent(TextMenuActivity.this, ChooseRecepientActivity.class);
+            	i.putExtra("isText", true);
+            	startActivity(i);
             }
         });
     	

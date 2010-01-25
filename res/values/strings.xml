@@ -19,7 +19,11 @@
 	<string name="button_send_text">Send Text</string>
 	<string name="button_send_email">Send Email</string>
 	<string name="button_send_pbt">Send PrivacyBot</string>
-	
+	<string name="button_send">Send</string>
+	<string name="msg_hint">Please type your message</string>
+	<string name="unlock_key">Unlock key</string>
+	<string name="enter_pass">Please enter your password</string>
+	<string name="ok">Ok</string>			
 	
 		<!-- ***************************
 	     File Manager strings

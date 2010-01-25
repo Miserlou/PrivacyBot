@@ -17,6 +17,8 @@
         <activity android:name=".KeyInfoListViewActivity" />
         <activity android:name=".TextMenuActivity" />
         <activity android:name=".EmailMenuActivity" />
+        <activity android:name=".ChooseRecepientActivity" />
+        <activity android:name=".SendMessageActivity" />
         
         <activity android:name=".KeyImporterActivity">
 			<intent-filter>

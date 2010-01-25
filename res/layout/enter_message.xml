@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+android:screenOrientation="landscape"
+android:id="@+id/rl"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="@drawable/bg"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+	<EditText
+	android:id="@+id/edittext_msg"
+	android:layout_width="300dip"
+	android:layout_height="200dip"
+	android:hint="@string/msg_hint"
+	android:textSize="28sp"
+	android:typeface="serif"
+	android:gravity="center"
+	android:layout_centerVertical="true"
+	android:layout_centerHorizontal="true"
+	>
+	</EditText>
+	<Button
+	android:id="@+id/send_button"
+	android:layout_width="250dip"
+	android:layout_height="60dip"
+	android:text="@string/button_send"
+	android:layout_alignParentBottom="true"
+	android:layout_centerHorizontal="true"
+	>
+	</Button>
+</RelativeLayout>
