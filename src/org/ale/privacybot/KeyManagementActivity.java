@@ -10,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class KeyManagement extends Activity {
+public class KeyManagementActivity extends Activity {
 	
     /** Called when the activity is first created. */
     @Override
@@ -33,9 +33,15 @@ public class KeyManagement extends Activity {
     	Button b2 = (Button)findViewById(R.id.new_key);
     	Button b3 = (Button)findViewById(R.id.import_key);
     	
+        b1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	startActivity(new Intent(KeyManagementActivity.this, KeyInfoListViewActivity.class));
+            }
+        });
+    	
         b3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	startActivity(new Intent(KeyManagement.this, FileManagerActivity.class));
+            	startActivity(new Intent(KeyManagementActivity.this, FileManagerActivity.class));
             }
         });
         

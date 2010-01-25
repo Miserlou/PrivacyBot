@@ -16,7 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class Installer extends Activity {
+public class InstallerActivity extends Activity {
 	final Handler mHandler = new Handler();
 	
     /** Called when the activity is first created. */

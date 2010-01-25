@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class KeyImporter extends Activity {
+public class KeyImporterActivity extends Activity {
 	final Handler mHandler = new Handler();
 	Uri uri;
 	

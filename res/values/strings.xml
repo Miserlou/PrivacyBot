@@ -10,9 +10,16 @@
 	<string name="button_email">Email</string>
 	<string name="button_manage_keys">Key Management</string>
 	<string name="blank"></string>
-	<string name="button_my_key">My Key</string>
+	<string name="button_my_key">My Keys</string>
 	<string name="button_new_key">New Key</string>
 	<string name="button_import_key">Import Key</string>
+	<string name="please_wait">Please wait..</string>
+	<string name="listing_keys">Listing keys..</string>
+	
+	
+		<!-- ***************************
+	     File Manager strings
+	     *************************** -->
 	
 	    <string name="about_comments">OI File Manager is an open file manager that seamlessly cooperates with other applications.</string>  
 	<string name="about_website_label">OI File Manager at OpenIntents</string> 
@@ -59,15 +66,6 @@
     
     <string name="application_not_available">Application not available</string>
     
-    <string name="faq">FAQ</string>
-    
-    <string name="faq_msg">How do I download things?\n\n Go to a torrent site like BTJunkie or the ThePirateBay, look for your title, then long press on the torrent link, save it, then open it.\n\nWhy do my downloads go back to 0%?\n\nThere is a bug in Android 1.6 which occurs when there are too many network connections. To avoid this error, lower the amount of connections per tracker in the options menu, quit the program and try again.\n\nWill you add multiple downloads?\n\nYES! When T-Mobile releases the 2.0 update for the G1, I will activate multiple downloads for this client.  </string>
-    
-
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
 	<!-- EULA -->
 	<string name="eula_title">OI File Manager EULA</string>
 	<string name="eula_accept">Accept</string>

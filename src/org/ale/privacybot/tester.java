@@ -48,14 +48,14 @@ public class tester extends Activity {
     	
         b3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	Intent km = new Intent(tester.this, KeyManagement.class);
+            	Intent km = new Intent(tester.this, KeyManagementActivity.class);
             	startActivity(km);
             }
         });
     }
 
     public void launchInstaller(){
-    	Intent install = new Intent(tester.this, Installer.class);
+    	Intent install = new Intent(tester.this, InstallerActivity.class);
     	startActivity(install);
     }
 

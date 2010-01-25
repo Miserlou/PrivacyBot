@@ -12,10 +12,11 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".Installer" />
-        <activity android:name=".KeyManagement" />
+        <activity android:name=".InstallerActivity" />
+        <activity android:name=".KeyManagementActivity" />
+        <activity android:name=".KeyInfoListViewActivity" />
         
-        <activity android:name=".KeyImporter">
+        <activity android:name=".KeyImporterActivity">
 			<intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                             <category android:name="android.intent.category.DEFAULT" />

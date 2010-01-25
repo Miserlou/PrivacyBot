@@ -3,6 +3,7 @@ package org.ale.privacybot;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 // GPG execution functions
 
@@ -49,5 +50,32 @@ public class GPG{
 		return execute(x);
 	}
 	
+	public static ArrayList<KeyInfo> getKeyList(){
+		// XXX: This needs to work for all keys, not just the first one
+		
+		ArrayList <KeyInfo> al = new ArrayList<KeyInfo>();
+		String x = base + "--list-secret-keys --with-colons";
+		String sec = execute(x);
+		String[] secar = sec.split(":");
+		String bytes = secar[1];
+		String fprint = secar[4];
+		String date = secar[5];
+		String namecommentemail=secar[9];
+		KeyInfo ki = new KeyInfo(bytes,fprint,date,namecommentemail);
+		al.add(ki);
+		
+		return al;
+	}
+	
+}
+
+class Key{
+	
+	public String name;
+	public String UID;
+	
+	public Key(){
+		
+	}
 }
 
