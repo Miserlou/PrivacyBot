@@ -84,7 +84,9 @@
         <ListView android:id="@android:id/list"
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
-            android:drawSelectorOnTop="false"/>
+            android:drawSelectorOnTop="false"
+            android:divider="#FFFFFF"
+    		android:dividerHeight="1dip" />
         
         <!-- Here is the view to show if the list is empty -->
         
