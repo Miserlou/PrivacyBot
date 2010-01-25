@@ -51,7 +51,6 @@ public class GPG{
 	}
 	
 	public static ArrayList<KeyInfo> getSecKeyList(){
-		// XXX: This needs to work for all keys, not just the first one
 		
 		String[] secar;
 		String bytes;
@@ -61,7 +60,7 @@ public class GPG{
 		boolean pub=false;
 		
 		ArrayList <KeyInfo> al = new ArrayList<KeyInfo>();
-		String x = base + "--list-keys --list-secret-keys --with-colons";
+		String x = base + "--list-secret-keys --with-colons";
 		String sec = execute(x);
 		
 		String[] keys = sec.split("\n");
@@ -80,7 +79,6 @@ public class GPG{
 	}
 	
 	public static ArrayList<KeyInfo> getPubKeyList(){
-		// XXX: This needs to work for all keys, not just the first one
 		
 		String[] secar;
 		String bytes;
