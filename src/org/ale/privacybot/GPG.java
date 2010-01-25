@@ -50,7 +50,7 @@ public class GPG{
 		return execute(x);
 	}
 	
-	public static ArrayList<KeyInfo> getKeyList(){
+	public static ArrayList<KeyInfo> getSecKeyList(){
 		// XXX: This needs to work for all keys, not just the first one
 		
 		String[] secar;
@@ -58,9 +58,10 @@ public class GPG{
 		String fprint;
 		String date;
 		String namecommentemail;
+		boolean pub=false;
 		
 		ArrayList <KeyInfo> al = new ArrayList<KeyInfo>();
-		String x = base + "--list-secret-keys --with-colons";
+		String x = base + "--list-keys --list-secret-keys --with-colons";
 		String sec = execute(x);
 		
 		String[] keys = sec.split("\n");
@@ -68,15 +69,42 @@ public class GPG{
 		for(int i=0; i<keys.length; i++){
 			secar = keys[i].split(":");
 			if(secar[0].contains("pub") || secar[0].contains("sec")){
-				System.out.println("Whoah");
 				bytes = secar[2];
 				fprint = secar[4];
 				date = secar[5];
 				namecommentemail=secar[9];
-				al.add(new KeyInfo(bytes,fprint,date,namecommentemail));
+				al.add(new KeyInfo(bytes,fprint,date,namecommentemail,pub));
 			}
 		}
+		return al;
+	}
+	
+	public static ArrayList<KeyInfo> getPubKeyList(){
+		// XXX: This needs to work for all keys, not just the first one
 		
+		String[] secar;
+		String bytes;
+		String fprint;
+		String date;
+		String namecommentemail;
+		boolean pub=true;
+		
+		ArrayList <KeyInfo> al = new ArrayList<KeyInfo>();
+		String x = base + "--list-keys --with-colons";
+		String sec = execute(x);
+		
+		String[] keys = sec.split("\n");
+		
+		for(int i=0; i<keys.length; i++){
+			secar = keys[i].split(":");
+			if(secar[0].contains("pub") || secar[0].contains("sec")){
+				bytes = secar[2];
+				fprint = secar[4];
+				date = secar[5];
+				namecommentemail=secar[9];
+				al.add(new KeyInfo(bytes,fprint,date,namecommentemail,pub));
+			}
+		}
 		return al;
 	}
 	

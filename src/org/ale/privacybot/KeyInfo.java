@@ -6,12 +6,14 @@ public class KeyInfo {
     private String fprint;
     private String date;
     private String namecommentemail;
+    private boolean pub = true;
 	
-	public KeyInfo(String b, String f, String d, String n){
+	public KeyInfo(String b, String f, String d, String n, boolean p){
 		bytes=b;
 		fprint=f;
 		date=d;
 		namecommentemail=n;
+		pub=p;
 	}
 	
 	public String getBytes(){
@@ -28,6 +30,10 @@ public class KeyInfo {
 	
 	public String getNameCommentEmail(){
 		return namecommentemail;
+	}
+	
+	public boolean getPublic(){
+		return pub;
 	}
    
 }

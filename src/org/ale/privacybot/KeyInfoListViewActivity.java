@@ -61,7 +61,8 @@ public class KeyInfoListViewActivity extends ListActivity{
     };
     private void getKeys(){
           try{
-        	  m_keys = GPG.getKeyList();
+        	  m_keys = GPG.getSecKeyList();
+        	  m_keys.addAll(GPG.getPubKeyList());
               //wtf why is this here
               Thread.sleep(2000);
             } catch (Exception e) {
@@ -86,6 +87,8 @@ private class KeyInfoAdapter extends ArrayAdapter<KeyInfo> {
                     LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     v = vi.inflate(R.layout.row, null);
                 }
+                
+                //XXX: Visually differentiate between public and secret keys.
                 KeyInfo o = items.get(position);
                 if (o != null) {
                         TextView tt = (TextView) v.findViewById(R.id.toptext);
