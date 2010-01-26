@@ -68,7 +68,7 @@ public class SendMessageActivity extends Activity {
             	String epath = GPG.encryptMessage(email, msg, password);
             	
             	if(isTxt){
-
+            		System.out.println("Sending TXT");
 	                Intent intent = new Intent(Intent.ACTION_SEND);
 	                intent.putExtra("address", recip);
 	                intent.putExtra("sms_body", getString(R.string.private_data_attached));
@@ -77,7 +77,7 @@ public class SendMessageActivity extends Activity {
 	                startActivity(intent); 
             }
             	else{
-
+            		System.out.println("Sending Email");
 	                Intent sendIntent = new Intent(Intent.ACTION_SEND);
 	                sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
 	                sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
