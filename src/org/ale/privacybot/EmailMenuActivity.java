@@ -33,7 +33,9 @@ public class EmailMenuActivity extends Activity {
     	
         b1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	startActivity(new Intent(EmailMenuActivity.this, KeyInfoListViewActivity.class));
+            	Intent i = new Intent(EmailMenuActivity.this, ChooseRecepientActivity.class);
+            	i.putExtra("isText", false);
+            	startActivity(i);
             }
         });
     	

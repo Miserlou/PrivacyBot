@@ -23,7 +23,8 @@
 	<string name="msg_hint">Please type your message</string>
 	<string name="unlock_key">Unlock key</string>
 	<string name="enter_pass">Please enter your password</string>
-	<string name="ok">Ok</string>			
+	<string name="ok">Ok</string>
+	<string name="private_data_attached">Private data is attached.</string>					
 	
 		<!-- ***************************
 	     File Manager strings

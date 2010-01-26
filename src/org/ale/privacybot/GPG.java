@@ -1,8 +1,11 @@
 package org.ale.privacybot;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.File;
 import java.util.ArrayList;
 
 // GPG execution functions
@@ -48,6 +51,21 @@ public class GPG{
 		// when I can figure out why it thinks self signed keys aren't.
 		String x = base + "--allow-secret-key-import --allow-non-selfsigned-uid --import " + str;
 		return execute(x);
+	}
+	
+	public static String encryptMessage(String recipiant, String message, String password){
+		
+		try { 
+			BufferedWriter out = new BufferedWriter(new FileWriter("pb"));
+			out.write(message);
+			out.close(); } 
+		catch (IOException e) { } 
+
+		String x = base + "-r " + recipiant;
+		new File("pb").delete(); 
+		execute(x);
+		return new File("pb.gpg").getAbsolutePath(); 
+		
 	}
 	
 	public static ArrayList<KeyInfo> getSecKeyList(){
@@ -108,13 +126,5 @@ public class GPG{
 	
 }
 
-class Key{
-	
-	public String name;
-	public String UID;
-	
-	public Key(){
-		
-	}
-}
+
 

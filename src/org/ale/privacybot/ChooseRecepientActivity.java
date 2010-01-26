@@ -70,11 +70,13 @@ public class ChooseRecepientActivity extends ListActivity{
      if(isTxt){
     	i.putExtra("isText", true);
     	i.putExtra("recepient", number);
+    	i.putExtra("email", email);
     	startActivity(i);
      }
      else{
      	i.putExtra("isText", false);
      	i.putExtra("recepient", email);
+     	i.putExtra("email", email);
      	startActivity(i);
       }
 
