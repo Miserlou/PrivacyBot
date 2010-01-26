@@ -17,5 +17,6 @@
     android:id="@+id/android:empty"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:text="Loading!.."/>
+    android:textAppearance="?android:attr/textAppearanceMedium"
+	android:gravity="center"/>
 </LinearLayout>

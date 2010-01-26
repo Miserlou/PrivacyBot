@@ -55,11 +55,13 @@ public class SendMessageActivity extends Activity {
         
         if(isTxt){
         	TextView tv = (TextView)findViewById(R.id.to);
-        	tv.setText(tv.getText().toString() + "\t" + recip);
+        	if(!tv.getText().toString().contains(recip)){
+        		tv.setText(tv.getText().toString() + "\t" + recip);}
         }
         else{
         	TextView tv = (TextView)findViewById(R.id.to);
-        	tv.setText(tv.getText().toString() + "\t" + email);
+        	if(!tv.getText().toString().contains(email)){
+        		tv.setText(tv.getText().toString() + "\t" + email);}
         }
         
     	Button b1 = (Button)findViewById(R.id.send_button);
@@ -124,21 +126,26 @@ public class SendMessageActivity extends Activity {
 	            intent.putExtra("address", recip);
 	            intent.putExtra("sms_body", getString(R.string.private_data_attached));
 	            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
-	            intent.setType("vnd.android-dir/mms-sms");
-	            startActivity(intent); 
+	            intent.putExtra(Intent.EXTRA_SUBJECT, R.string.private_data_attached);
+	            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.private_data_attached));
+	            intent.setType("*/*");
+	            startActivity(Intent.createChooser(intent, getString(R.string.choose_msg_app))); 
 	    }
 	    	else{
 	    		System.out.println("Sending Email");
 	            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-	            sendIntent.putExtra(Intent.EXTRA_EMAIL, email);
-	            //sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.private_data_attached));
+	            sendIntent.putExtra("address", email);
+	            String[] erecp = {email};
+	            sendIntent.putExtra(Intent.EXTRA_EMAIL, erecp);
+	            sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.private_data_attached));
 	            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
 	            sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
 	            //Okay, I think I can ignore the MIME type on the sending side
 	            //Worst case scenario, recipiants can deal with file extensions anyway
 	            //sendIntent.setType("message/rfc822");
 	            sendIntent.setType("*/*");
-	            startActivity(sendIntent);
+	            startActivity(Intent.createChooser(sendIntent, getString(R.string.choose_email_app)));
+	            finish();
 	    	}}
     	
 	       catch(Exception e){

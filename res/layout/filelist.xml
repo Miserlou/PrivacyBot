@@ -86,7 +86,8 @@
             android:layout_height="fill_parent"
             android:drawSelectorOnTop="false"
             android:divider="#FFFFFF"
-    		android:dividerHeight="1dip" />
+    		android:dividerHeight="1dip"
+    		android:cacheColorHint="#00000000" />
         
         <!-- Here is the view to show if the list is empty -->
         

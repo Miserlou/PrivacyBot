@@ -26,7 +26,9 @@
 	<string name="ok">Ok</string>
 	<string name="private_data_attached">Private data is attached.</string>
 	<string name="decrypting">Decrypting..</string>
-	<string name="to">\nTo:\t</string>								
+	<string name="to">\nTo:\t</string>				
+	<string name="choose_msg_app">Choose your messaging app</string>
+	<string name="choose_email_app">Choose your email app</string>					
 	
 		<!-- ***************************
 	     File Manager strings
