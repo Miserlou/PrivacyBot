@@ -59,10 +59,15 @@ public class ChooseRecepientActivity extends ListActivity{
      // Get the item that was clicked
      KeyInfo o = (KeyInfo)this.getListAdapter().getItem(position);
      String nce = o.getNameCommentEmail();
-     int op = nce.indexOf("(");
-     int cl = nce.indexOf(")");
-     String number = nce.substring(op+1, cl);
-     System.out.println(number);
+     int op;
+     int cl;
+     String number = "000-000-0000";
+     if(nce.contains("(") && nce.contains(")")){
+	     op = nce.indexOf("(");
+	     cl = nce.indexOf(")");
+	     number = nce.substring(op+1, cl);
+	     System.out.println(number);
+     }
      op = nce.indexOf("<");
      cl = nce.indexOf(">");
      String email = nce.substring(op+1, cl);

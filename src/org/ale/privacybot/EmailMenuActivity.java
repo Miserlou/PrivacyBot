@@ -38,10 +38,22 @@ public class EmailMenuActivity extends Activity {
             	startActivity(i);
             }
         });
+        
+        b2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	Intent i = new Intent(EmailMenuActivity.this, SendKeyOrPbotActivity.class);
+            	i.putExtra("isText", false);
+            	i.putExtra("sendKey", true);
+            	startActivity(i);
+            }
+        });
     	
         b3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	//startActivity(new Intent(EmailMenuActivity.this, FileManagerActivity.class));
+            	Intent i = new Intent(EmailMenuActivity.this, SendKeyOrPbotActivity.class);
+            	i.putExtra("isText", false);
+            	i.putExtra("sendKey", false);
+            	startActivity(i);
             }
         });
         

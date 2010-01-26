@@ -28,7 +28,9 @@
 	<string name="decrypting">Decrypting..</string>
 	<string name="to">\nTo:\t</string>				
 	<string name="choose_msg_app">Choose your messaging app</string>
-	<string name="choose_email_app">Choose your email app</string>					
+	<string name="choose_email_app">Choose your email app</string>
+	<string name="sending">\n\n\n\nSending..</string>
+	<string name="privacybot_attached">PrivacyBot for Android is attached</string>							
 	
 		<!-- ***************************
 	     File Manager strings

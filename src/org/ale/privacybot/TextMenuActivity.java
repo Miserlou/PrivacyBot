@@ -1,7 +1,5 @@
 package org.ale.privacybot;
 
-import org.openintents.filemanager.FileManagerActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,10 +38,22 @@ public class TextMenuActivity extends Activity {
             	startActivity(i);
             }
         });
+        
+        b2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	Intent i = new Intent(TextMenuActivity.this, SendKeyOrPbotActivity.class);
+            	i.putExtra("isText", true);
+            	i.putExtra("sendKey", true);
+            	startActivity(i);
+            }
+        });
     	
         b3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	startActivity(new Intent(TextMenuActivity.this, FileManagerActivity.class));
+            	Intent i = new Intent(TextMenuActivity.this, SendKeyOrPbotActivity.class);
+            	i.putExtra("isText", true);
+            	i.putExtra("sendKey", false);
+            	startActivity(i);
             }
         });
         
