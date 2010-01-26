@@ -56,15 +56,15 @@ public class GPG{
 	public static String encryptMessage(String recipiant, String message, String password){
 		
 		try { 
-			BufferedWriter out = new BufferedWriter(new FileWriter("/data/data/org.ale/privacybot/pb"));
+			BufferedWriter out = new BufferedWriter(new FileWriter("/data/data/org.ale.privacybot/pb"));
 			out.write(message);
 			out.close(); } 
 		catch (IOException e) { } 
 
-		String x = base + "-r " + recipiant + "-e " + "/data/data/org.ale/privacybot/pb";
+		String x = base + "-r " + recipiant + "-e " + "/data/data/org.ale.privacybot/pb";
 		execute(x);
-		new File("/data/data/org.ale/privacybot/pb").delete();
-		return new File("/data/data/org.ale/privacybot/pb.gpg").getAbsolutePath(); 
+		new File("/data/data/org.ale.privacybot/pb").delete();
+		return new File("/data/data/org.ale.privacybot/pb.gpg").getAbsolutePath(); 
 		
 	}
 	

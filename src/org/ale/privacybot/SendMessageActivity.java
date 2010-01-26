@@ -57,35 +57,11 @@ public class SendMessageActivity extends Activity {
     	
         b1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+            	//sendMessage is called when the password is entered
+            	//XXX: What if the password is wrong?!
             	getPassword();
-            	if(!pe){
-            		System.out.println("No password entered");
-            		return;
-            	}
-            	
-            	TextView tv = (TextView) findViewById(R.id.edittext_msg);
-            	String msg = tv.getText().toString();
-            	String epath = GPG.encryptMessage(email, msg, password);
-            	
-            	if(isTxt){
-            		System.out.println("Sending TXT");
-	                Intent intent = new Intent(Intent.ACTION_SEND);
-	                intent.putExtra("address", recip);
-	                intent.putExtra("sms_body", getString(R.string.private_data_attached));
-	                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
-	                intent.setType("application/pgp-encrypted");
-	                startActivity(intent); 
             }
-            	else{
-            		System.out.println("Sending Email");
-	                Intent sendIntent = new Intent(Intent.ACTION_SEND);
-	                sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
-	                sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
-	                sendIntent.setType("application/pgp-encrypted");
-	                startActivity(sendIntent); 
-            }
-            }
-        });
+            });
     }
         
     private void getPassword(){
@@ -113,13 +89,43 @@ public class SendMessageActivity extends Activity {
     	  	pe=true;
         	editor.putString("getting_pass", "0");
         	editor.commit();
+        	sendMessage();
     	  }
     	});
 
     	alert.show();
         	
     }
+    
+    private void sendMessage(){
+    	if(!pe){
+    		System.out.println("No password entered");
+    		return;
+    	}
     	
+    	TextView tv = (TextView) findViewById(R.id.edittext_msg);
+    	String msg = tv.getText().toString();
+    	String epath = GPG.encryptMessage(email, msg, password);
+    	
+    	if(isTxt){
+    		System.out.println("Sending TXT");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra("address", recip);
+            intent.putExtra("sms_body", getString(R.string.private_data_attached));
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
+            intent.setType("application/pgp-encrypted");
+            startActivity(intent); 
+    }
+    	else{
+    		System.out.println("Sending Email");
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
+            sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
+            sendIntent.setType("application/pgp-encrypted");
+            startActivity(sendIntent); 
+    
+    }
+    }
 
     
 }
