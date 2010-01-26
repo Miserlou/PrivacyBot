@@ -21,5 +21,9 @@
 <MimeTypes>
 	<!-- GPG Private Keys up in this motherfucker, motherfucker -->
 	<type extension=".key" mimetype="application/pgp-keys" />
+	<type extension=".asc" mimetype="application/pgp-keys" />
+	
+	<type extension=".gpg" mimetype="application/pgp-encrypted" />
+	<type extension=".pgp" mimetype="application/pgp-encrypted" />
 	
 </MimeTypes>

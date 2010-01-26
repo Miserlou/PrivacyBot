@@ -36,7 +36,7 @@ public class SendMessageActivity extends Activity {
         setContentView(R.layout.enter_message);
         
         isTxt = getIntent().getExtras().getBoolean("isText");
-        recip = getIntent().getExtras().getString("recipient");
+        recip = getIntent().getExtras().getString("recepient");
         email = getIntent().getExtras().getString("email");
 
         // This is because the G1 and similar phones relaunch the activity when opened
@@ -52,6 +52,15 @@ public class SendMessageActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
+        
+        if(isTxt){
+        	TextView tv = (TextView)findViewById(R.id.to);
+        	tv.setText(tv.getText().toString() + "\t" + recip);
+        }
+        else{
+        	TextView tv = (TextView)findViewById(R.id.to);
+        	tv.setText(tv.getText().toString() + "\t" + email);
+        }
         
     	Button b1 = (Button)findViewById(R.id.send_button);
     	
@@ -107,25 +116,37 @@ public class SendMessageActivity extends Activity {
     	String msg = tv.getText().toString();
     	String epath = GPG.encryptMessage(email, msg, password);
     	
-    	if(isTxt){
-    		System.out.println("Sending TXT");
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra("address", recip);
-            intent.putExtra("sms_body", getString(R.string.private_data_attached));
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
-            intent.setType("application/pgp-encrypted");
-            startActivity(intent); 
-    }
-    	else{
-    		System.out.println("Sending Email");
-            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
-            sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
-            sendIntent.setType("application/pgp-encrypted");
-            startActivity(sendIntent); 
+    	try{
+    	
+	    	if(isTxt){
+	    		System.out.println("Sending TXT");
+	            Intent intent = new Intent(Intent.ACTION_SEND);
+	            intent.putExtra("address", recip);
+	            intent.putExtra("sms_body", getString(R.string.private_data_attached));
+	            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
+	            intent.setType("vnd.android-dir/mms-sms");
+	            startActivity(intent); 
+	    }
+	    	else{
+	    		System.out.println("Sending Email");
+	            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+	            sendIntent.putExtra(Intent.EXTRA_EMAIL, email);
+	            //sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.private_data_attached));
+	            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
+	            sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
+	            //Okay, I think I can ignore the MIME type on the sending side
+	            //Worst case scenario, recipiants can deal with file extensions anyway
+	            //sendIntent.setType("message/rfc822");
+	            sendIntent.setType("*/*");
+	            startActivity(sendIntent);
+	    	}}
+    	
+	       catch(Exception e){
+	    	   tv.setText(e.toString());
+	       }
     
     }
-    }
+    
 
     
 }

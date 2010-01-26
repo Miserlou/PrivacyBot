@@ -7,6 +7,16 @@ android:layout_height="fill_parent"
 android:background="@drawable/bg"
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
+	<TextView  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="@string/to"
+	    android:id="@+id/to"
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:textColor="#FFFFFF"
+	    android:gravity="center"
+	    />
+	    
 	<EditText
 	android:id="@+id/edittext_msg"
 	android:layout_width="300dip"

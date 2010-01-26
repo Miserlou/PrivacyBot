@@ -26,9 +26,22 @@
                             <category android:name="android.intent.category.DEFAULT" />
                             <category android:name="android.intent.category.BROWSABLE" />
                             <data android:scheme="file" /> 
-                			<data android:mimeType="application/gpg-keys" />
-                			<data android:mimeType="*/*"/>
+                			<data android:mimeType="application/pgp-keys" />
+                			<!-- <data android:mimeType="*/*"/>-->
                 			<data android:pathPattern=".*\\.key" />
+                			<data android:pathPattern=".*\\.asc" />
+            </intent-filter> 
+		</activity>
+		
+		 <activity android:name=".ViewDecryptedMessageActivity">
+			<intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                            <category android:name="android.intent.category.DEFAULT" />
+                            <category android:name="android.intent.category.BROWSABLE" />
+                            <data android:scheme="file" /> 
+                		    <data android:mimeType="application/pgp-encrypted" />>
+                			<!-- <data android:mimeType="*/*"/>--> 
+                			<data android:pathPattern=".*\\.gpg" />
             </intent-filter> 
 		</activity>
         

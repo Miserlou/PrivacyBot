@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.net.Uri;
+
 // GPG execution functions
 
 public class GPG{
@@ -70,6 +72,12 @@ public class GPG{
 		execute(x);
 		pb.delete();
 		return pbg.getAbsolutePath(); 
+		
+	}
+	
+	public static String decryptMessage(Uri uri, String password){
+		
+		return "Yo dogg this should be doing something";
 		
 	}
 	

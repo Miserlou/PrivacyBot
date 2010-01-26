@@ -24,7 +24,9 @@
 	<string name="unlock_key">Unlock key</string>
 	<string name="enter_pass">Please enter your password</string>
 	<string name="ok">Ok</string>
-	<string name="private_data_attached">Private data is attached.</string>					
+	<string name="private_data_attached">Private data is attached.</string>
+	<string name="decrypting">Decrypting..</string>
+	<string name="to">\nTo:\t</string>								
 	
 		<!-- ***************************
 	     File Manager strings

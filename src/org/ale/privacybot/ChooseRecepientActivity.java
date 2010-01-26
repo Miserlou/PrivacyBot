@@ -61,13 +61,15 @@ public class ChooseRecepientActivity extends ListActivity{
      String nce = o.getNameCommentEmail();
      int op = nce.indexOf("(");
      int cl = nce.indexOf(")");
-     String number = nce.substring(op+1, cl-1);
+     String number = nce.substring(op+1, cl);
+     System.out.println(number);
      op = nce.indexOf("<");
      cl = nce.indexOf(">");
-     String email = nce.substring(op+1, cl-1);
+     String email = nce.substring(op+1, cl);
      
      Intent i = new Intent(ChooseRecepientActivity.this, SendMessageActivity.class);
      if(isTxt){
+    	System.out.println("I'mmatext");
     	i.putExtra("isText", true);
     	i.putExtra("recepient", number);
     	i.putExtra("email", email);
