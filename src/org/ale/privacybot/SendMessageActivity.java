@@ -126,7 +126,7 @@ public class SendMessageActivity extends Activity {
 	            intent.putExtra("address", recip);
 	            intent.putExtra("sms_body", getString(R.string.private_data_attached));
 	            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+epath));
-	            intent.putExtra(Intent.EXTRA_SUBJECT, R.string.private_data_attached);
+	            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.private_data_attached));
 	            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.private_data_attached));
 	            intent.setType("*/*");
 	            startActivity(Intent.createChooser(intent, getString(R.string.choose_msg_app))); 

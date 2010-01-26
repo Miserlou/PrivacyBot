@@ -1,5 +1,7 @@
 package org.ale.privacybot;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,39 +34,50 @@ public class SendKeyOrPbotActivity extends Activity {
         super.onStart();
         
         Uri objPath = Uri.parse("");
+        String attachedString = "";
         
         if(sendKey){
+        		boolean exists = (new File("/data/data/org.ale.privacybot/my_pub.key")).exists();
+        		if (exists){
+        			objPath = Uri.parse("file://"+"/data/data/org.ale.privacybot/my_pub.key");
+        		}
+        		else {
+        			GPG.exportPublicKey();
+        			objPath = Uri.parse("file://"+"/data/data/org.ale.privacybot/my_pub.key");
+        		}
+        		attachedString = getString(R.string.pubkey_attached);
         }
         else{
         	objPath = Uri.parse("file://"+"/data/app/org.ale.privacybot.apk");
+        	attachedString = getString(R.string.privacybot_attached);
         }
         
         if(isTxt){
-        	sendTxt(objPath);
+        	sendTxt(objPath, attachedString);
         }
         else{
-        	sendEmail(objPath);
+        	sendEmail(objPath, attachedString);
         }
         
         finish();
     }
     
-    public void sendTxt(Uri u){
+    public void sendTxt(Uri u, String as){
 		System.out.println("Sending TXT");
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra("sms_body", getString(R.string.privacybot_attached));
+        intent.putExtra("sms_body", as);
         intent.putExtra(Intent.EXTRA_STREAM, u);
-        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.private_data_attached);
-        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.privacybot_attached));
+        intent.putExtra(Intent.EXTRA_SUBJECT, as);
+        intent.putExtra(Intent.EXTRA_TEXT, as);
         intent.setType("*/*");
         startActivity(Intent.createChooser(intent, getString(R.string.choose_msg_app))); 
     }
     
-    public void sendEmail(Uri u){
+    public void sendEmail(Uri u, String as){
 		System.out.println("Sending Email");
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.privacybot_attached));
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.privacybot_attached));
+        sendIntent.putExtra(Intent.EXTRA_TEXT, as);
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, as);
         sendIntent.putExtra(Intent.EXTRA_STREAM, u);
         sendIntent.setType("*/*");
         startActivity(Intent.createChooser(sendIntent, getString(R.string.choose_email_app)));

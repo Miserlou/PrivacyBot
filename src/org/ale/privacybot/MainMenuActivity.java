@@ -28,11 +28,6 @@ public class MainMenuActivity extends Activity {
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String data = prefs.getString("binary_data", "0");
         
-        // XXX: REMOVE FOR PRODUCTION
-        System.out.println("binary_data is");
-        System.out.println(data);
-        data = "0";
-        
         if(data != "1"){
         	launchInstaller();
         }

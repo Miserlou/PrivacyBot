@@ -55,6 +55,11 @@ public class GPG{
 		return execute(x);
 	}
 	
+	public static String exportPublicKey(){
+		String x = base + "--output /data/data/org.ale.privacybot/my_pub.key --armor --export";
+		return execute(x);
+	}
+	
 	public static String encryptMessage(String recipiant, String message, String password){
 		
 		File pb = new File("/data/data/org.ale.privacybot/pb");
@@ -77,7 +82,7 @@ public class GPG{
 	
 	public static String decryptMessage(Uri uri, String password){
 		
-		return "Yo dogg this should be doing something";
+		return "Yo dogg this should be doing something\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing something";
 		
 	}
 	
