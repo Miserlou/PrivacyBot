@@ -55,16 +55,21 @@ public class GPG{
 	
 	public static String encryptMessage(String recipiant, String message, String password){
 		
+		File pb = new File("/data/data/org.ale.privacybot/pb");
+		File pbg = new File("/data/data/org.ale.privacybot/pb.gpg");
 		try { 
+			System.out.println("writing to pb");
 			BufferedWriter out = new BufferedWriter(new FileWriter("/data/data/org.ale.privacybot/pb"));
 			out.write(message);
 			out.close(); } 
-		catch (IOException e) { } 
+		catch (IOException e) {
+			System.out.println("writing to pb error");
+		} 
 
-		String x = base + "-r " + recipiant + "-e " + "/data/data/org.ale.privacybot/pb";
+		String x = base + "-r " + recipiant + " -e " + "/data/data/org.ale.privacybot/pb";
 		execute(x);
-		new File("/data/data/org.ale.privacybot/pb").delete();
-		return new File("/data/data/org.ale.privacybot/pb.gpg").getAbsolutePath(); 
+		pb.delete();
+		return pbg.getAbsolutePath(); 
 		
 	}
 	
