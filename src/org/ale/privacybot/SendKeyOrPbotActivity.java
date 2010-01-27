@@ -37,18 +37,18 @@ public class SendKeyOrPbotActivity extends Activity {
         String attachedString = "";
         
         if(sendKey){
-        		boolean exists = (new File("/data/data/org.ale.privacybot/my_pub.key")).exists();
+        		boolean exists = (new File("/sdcard/my_pub.key")).exists();
         		if (exists){
-        			objPath = Uri.parse("file://"+"/data/data/org.ale.privacybot/my_pub.key");
+        			objPath = Uri.fromFile(new File("/sdcard/my_pub.key"));
         		}
         		else {
         			GPG.exportPublicKey();
-        			objPath = Uri.parse("file://"+"/data/data/org.ale.privacybot/my_pub.key");
+        			objPath = Uri.fromFile(new File("/sdcard/my_pub.key"));
         		}
         		attachedString = getString(R.string.pubkey_attached);
         }
         else{
-        	objPath = Uri.parse("file://"+"/data/app/org.ale.privacybot.apk");
+        	objPath = Uri.fromFile(new File("/data/app/org.ale.privacybot.apk"));
         	attachedString = getString(R.string.privacybot_attached);
         }
         
@@ -69,17 +69,18 @@ public class SendKeyOrPbotActivity extends Activity {
         intent.putExtra(Intent.EXTRA_STREAM, u);
         intent.putExtra(Intent.EXTRA_SUBJECT, as);
         intent.putExtra(Intent.EXTRA_TEXT, as);
-        intent.setType("*/*");
+        intent.setType("text/plain");
         startActivity(Intent.createChooser(intent, getString(R.string.choose_msg_app))); 
     }
     
     public void sendEmail(Uri u, String as){
 		System.out.println("Sending Email");
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        //sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
         sendIntent.putExtra(Intent.EXTRA_TEXT, as);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, as);
         sendIntent.putExtra(Intent.EXTRA_STREAM, u);
-        sendIntent.setType("*/*");
+        sendIntent.setType("application/pgp-keys");
         startActivity(Intent.createChooser(sendIntent, getString(R.string.choose_email_app)));
         finish();
     }

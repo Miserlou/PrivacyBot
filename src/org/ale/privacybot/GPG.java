@@ -56,7 +56,7 @@ public class GPG{
 	}
 	
 	public static String exportPublicKey(){
-		String x = base + "--output /data/data/org.ale.privacybot/my_pub.key --armor --export";
+		String x = base + "--output=/sdcard/my_pub.key --armor --export";
 		return execute(x);
 	}
 	
