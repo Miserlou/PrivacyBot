@@ -62,15 +62,14 @@ public class SendKeyOrPbotActivity extends Activity {
     		else {
     			try{
     				appToSD();
-    				objPath = Uri.fromFile(new File("/sdcard/my_pub.key"));
+    				objPath = Uri.fromFile(new File("/sdcard/privacybot.apk"));
     				}
     			catch(IOException e){
     				Toast.makeText(this, getString(R.string.unable_to_copy), Toast.LENGTH_LONG).show();
     			}
     			
     		}
-    		attachedString = getString(R.string.pubkey_attached);
-        	attachedString = getString(R.string.privacybot_attached);
+        		attachedString = getString(R.string.privacybot_attached);
         }
         
         if(isTxt){
