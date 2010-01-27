@@ -1,7 +1,5 @@
 package org.ale.privacybot;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,8 +40,11 @@ public class SendKeyOrPbotActivity extends Activity {
         
         Uri objPath = Uri.parse("");
         String attachedString = "";
+        String mime = "";
         
         if(sendKey){
+        	mime = "application/pgp-keys";
+        	
         		boolean exists = (new File("/sdcard/my_pub.key")).exists();
         		if (exists){
         			objPath = Uri.fromFile(new File("/sdcard/my_pub.key"));
@@ -55,9 +56,10 @@ public class SendKeyOrPbotActivity extends Activity {
         		attachedString = getString(R.string.pubkey_attached);
         }
         else{
+        	mime = "application/vnd.android.package-archive";
     		boolean exists = (new File("/sdcard/privacybot.apk")).exists();
     		if (exists){
-    			objPath = Uri.fromFile(new File("/sdcard/my_pub.key"));
+    			objPath = Uri.fromFile(new File("/sdcard/privacybot.apk"));
     		}
     		else {
     			try{
@@ -66,6 +68,7 @@ public class SendKeyOrPbotActivity extends Activity {
     				}
     			catch(IOException e){
     				Toast.makeText(this, getString(R.string.unable_to_copy), Toast.LENGTH_LONG).show();
+    				finish();
     			}
     			
     		}
@@ -76,7 +79,7 @@ public class SendKeyOrPbotActivity extends Activity {
         	sendTxt(objPath, attachedString);
         }
         else{
-        	sendEmail(objPath, attachedString);
+        	sendEmail(objPath, attachedString, mime);
         }
         
         finish();
@@ -93,13 +96,13 @@ public class SendKeyOrPbotActivity extends Activity {
         startActivity(Intent.createChooser(intent, getString(R.string.choose_msg_app))); 
     }
     
-    public void sendEmail(Uri u, String as){
+    public void sendEmail(Uri u, String as, String mime){
 		System.out.println("Sending Email");
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, as);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, as);
         sendIntent.putExtra(Intent.EXTRA_STREAM, u);
-        sendIntent.setType("application/pgp-keys");
+        sendIntent.setType(mime);
         startActivity(Intent.createChooser(sendIntent, getString(R.string.choose_email_app)));
         finish();
     }
