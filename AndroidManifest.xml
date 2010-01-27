@@ -30,8 +30,8 @@
                             <data android:scheme="file" /> 
                 			<data android:mimeType="application/pgp-keys" />
                 			<!-- <data android:mimeType="*/*"/>-->
-                			<data android:pathPattern=".*\\.key" />
-                			<data android:pathPattern=".*\\.asc" />
+                			<!--<data android:pathPattern=".*\\.key" />-->
+                			<!--<data android:pathPattern=".*\\.asc" />-->
             </intent-filter> 
 		</activity>
 		
@@ -43,7 +43,7 @@
                             <data android:scheme="file" /> 
                 		    <data android:mimeType="application/pgp-encrypted" />>
                 			<!-- <data android:mimeType="*/*"/>--> 
-                			<data android:pathPattern=".*\\.gpg" />
+                			<!--<data android:pathPattern=".*\\.gpg" />-->
             </intent-filter> 
 		</activity>
         
