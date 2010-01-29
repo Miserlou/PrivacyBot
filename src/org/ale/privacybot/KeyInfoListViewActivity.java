@@ -5,15 +5,22 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class KeyInfoListViewActivity extends ListActivity{
+	
+	protected static final int CONTEXTMENU_DELETEITEM = 0; 
    
     private ProgressDialog m_ProgressDialog = null;
     private ArrayList<KeyInfo> m_keys = null;
@@ -31,7 +38,7 @@ public class KeyInfoListViewActivity extends ListActivity{
         setContentView(R.layout.key_list);
         m_keys = new ArrayList<KeyInfo>();
         this.m_adapter = new KeyInfoAdapter(this, R.layout.row, m_keys);
-                setListAdapter(this.m_adapter);
+                setListAdapter(this.m_adapter);         
        
         viewKeys = new Runnable(){
             @Override
@@ -39,9 +46,13 @@ public class KeyInfoListViewActivity extends ListActivity{
                 getKeys();
             }
         };
-    Thread thread =  new Thread(null, viewKeys, "MagentoBackground");
+        
+        registerForContextMenu(getListView());
+        
+        Thread thread =  new Thread(null, viewKeys, "MagentoBackground");
         thread.start();
         //This stuff would be better to load from a DB
+        
         m_ProgressDialog = ProgressDialog.show(KeyInfoListViewActivity.this,    
               getString(R.string.please_wait), getString(R.string.listing_keys), true);
     }
@@ -70,6 +81,41 @@ public class KeyInfoListViewActivity extends ListActivity{
             runOnUiThread(returnRes);
         }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+            ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+
+		menu.add(0, 0, 0, "Make default");
+		menu.add(0, 1, 0,  "Delete");
+}
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+    	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    	try {
+    	    info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+    	} catch (ClassCastException e) {
+    	    System.out.println("Bad menuInfo");
+    	    return false;
+    	}
+    	long id = getListAdapter().getItemId(info.position);
+
+		switch (item.getItemId()) {
+		case 0:
+			System.out.println("You pressed Make Default");
+			GPG.makeDefault(m_adapter.getItem((int) id), getBaseContext());
+			return true;
+		case 1:
+			System.out.println("You pressed Delete");
+			GPG.deleteKey(m_adapter.getItem((int) id), getBaseContext());
+			getKeys();
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}	
+    }
+
 
 private class KeyInfoAdapter extends ArrayAdapter<KeyInfo> {
 
@@ -96,7 +142,12 @@ private class KeyInfoAdapter extends ArrayAdapter<KeyInfo> {
                         if (tt != null) {
                               tt.setText(o.getNameCommentEmail());                            }
                         if(bt != null){
-                              bt.setText(o.getFingerprint());
+                        	  if (!o.getPublic()){
+                        		  bt.setText("Secret - " + o.getFingerprint());
+                        	  }
+                        	  else{
+                        		  bt.setText(o.getFingerprint());
+                        	  }
                         }
                 }
                 return v;

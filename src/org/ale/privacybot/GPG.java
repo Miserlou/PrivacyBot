@@ -8,7 +8,10 @@ import java.io.InputStreamReader;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 
 // GPG execution functions
 
@@ -102,8 +105,9 @@ public class GPG{
 				  sb.append(line).append("\n");
 				}
 			System.out.println("GPG Error:");
-			System.out.println(sb.toString());
-			if(sb.toString().contains("bad passphrase")){
+			String sbo = sb.toString();
+			System.out.println(sbo);
+			if(sbo.contains("bad passphrase") || sbo.contains("unusable public key") || sbo.contains("failed") || sbo.contains("skipped")){
 				return false;
 			}
 			sb = new StringBuffer();
@@ -114,7 +118,7 @@ public class GPG{
 			String answer = sb.toString();
 			System.out.println("GPG Stdout:");
 			System.out.println(answer);
-			if(sb.toString().contains("bad passphrase")){
+			if(answer.contains("bad passphrase") || answer.contains("unusable public key")|| sbo.contains("failed") || sbo.contains("skipped")){
 				return false;
 			}
 		} catch (IOException e) {
@@ -179,6 +183,29 @@ public class GPG{
 			}
 		}
 		return al;
+	}
+	
+	public static void makeDefault(KeyInfo k, Context c){
+		System.out.println("Making " + k.getFingerprint() + " default");
+		//String x = "--default-key=" + k.getFingerprint();
+		//execute(x);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        final SharedPreferences.Editor editor = prefs.edit();
+    	editor.putString("default_key", k.getFingerprint());
+    	editor.commit();
+	}
+	
+	public static void deleteKey(KeyInfo k, Context c){
+		System.out.println("Deleting " + k.getFingerprint());
+		String x = base + "--delete-secret-and-public-key=" + k.getFingerprint();
+		execute(x);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+		if (prefs.getString("default_key", "none") == k.getFingerprint()){
+	        final SharedPreferences.Editor editor = prefs.edit();
+	    	editor.putString("default_key", "");
+	    	editor.commit();
+		}
+
 	}
 	
 }
