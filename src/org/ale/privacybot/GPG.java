@@ -186,6 +186,12 @@ public class GPG{
 	}
 	
 	public static void makeDefault(KeyInfo k, Context c){
+		
+		//can't make pub-keys default
+		if(k.getPublic()){
+			return;
+		}
+		
 		System.out.println("Making " + k.getFingerprint() + " default");
 		//String x = "--default-key=" + k.getFingerprint();
 		//execute(x);
@@ -197,7 +203,7 @@ public class GPG{
 	
 	public static void deleteKey(KeyInfo k, Context c){
 		System.out.println("Deleting " + k.getFingerprint());
-		String x = base + "--delete-secret-and-public-key=" + k.getFingerprint();
+		String x = base + "--batch --yes --delete-secret-and-public-key=" + k.getFingerprint();
 		execute(x);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
 		if (prefs.getString("default_key", "none") == k.getFingerprint()){

@@ -109,7 +109,7 @@ public class KeyInfoListViewActivity extends ListActivity{
 		case 1:
 			System.out.println("You pressed Delete");
 			GPG.deleteKey(m_adapter.getItem((int) id), getBaseContext());
-			getKeys();
+			m_adapter.remove(m_adapter.getItem((int) id));
 			return true;
 		default:
 			return super.onContextItemSelected(item);
