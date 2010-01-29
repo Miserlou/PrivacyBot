@@ -71,9 +71,13 @@ public class ViewDecryptedMessageActivity extends Activity {
         	editor.putString("getting_pass", "0");
         	editor.commit();
         	
-        	String dec = GPG.decryptMessage(uri, password);
-        	TextView tv = (TextView) findViewById(R.id.decrypted);
-        	tv.setText(dec);
+        	if(GPG.checkPassword(password)){
+	        	String dec = GPG.decryptMessage(uri, password);
+	        	TextView tv = (TextView) findViewById(R.id.decrypted);
+	        	tv.setText(dec);}
+	        else{
+	        	getPassword();
+	        }
     	  }
     	});
 

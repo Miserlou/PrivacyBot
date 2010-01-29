@@ -62,18 +62,19 @@ public class GPG{
 	
 	public static String encryptMessage(String recipiant, String message, String password){
 		
-		File pb = new File("/data/data/org.ale.privacybot/pb");
-		File pbg = new File("/data/data/org.ale.privacybot/pb.gpg");
+		// XXX: Change to ExternalStorageDirectory
+		File pb = new File("/sdcard/pb");
+		File pbg = new File("/sdcard/pb.gpg");
 		try { 
 			System.out.println("writing to pb");
-			BufferedWriter out = new BufferedWriter(new FileWriter("/data/data/org.ale.privacybot/pb"));
+			BufferedWriter out = new BufferedWriter(new FileWriter("/sdcard/pb"));
 			out.write(message);
 			out.close(); } 
 		catch (IOException e) {
 			System.out.println("writing to pb error");
 		} 
 
-		String x = base + "-r " + recipiant + " -e " + "/data/data/org.ale.privacybot/pb";
+		String x = base + "-r " + recipiant + " --passphrase=" + password + " -e " + "/sdcard/pb";
 		execute(x);
 		pb.delete();
 		return pbg.getAbsolutePath(); 
@@ -81,9 +82,47 @@ public class GPG{
 	}
 	
 	public static String decryptMessage(Uri uri, String password){
+		String x = base + "-passphrase=" + password + " -d " + uri.getPath();
+		return execute(x);
+	}
+	
+	public static boolean checkPassword(String pASSphrase){
 		
-		return "Yo dogg this should be doing something\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing somethingYo dogg this should be doing something";
+		// Is there a better way to check for this?
+		String s = base + "--sign --dry-run --passphrase=" + pASSphrase;
+		Process p;
+		try {
+			p = Runtime.getRuntime().exec(s);
+			//p.waitFor();
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			BufferedReader er = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			while ((line = er.readLine()) != null) {
+				  sb.append(line).append("\n");
+				}
+			System.out.println("GPG Error:");
+			System.out.println(sb.toString());
+			if(sb.toString().contains("bad passphrase")){
+				return false;
+			}
+			sb = new StringBuffer();
+			line = null;
+			while ((line = br.readLine()) != null) {
+			  sb.append(line).append("\n");
+			}
+			String answer = sb.toString();
+			System.out.println("GPG Stdout:");
+			System.out.println(answer);
+			if(sb.toString().contains("bad passphrase")){
+				return false;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return true;
 	}
 	
 	public static ArrayList<KeyInfo> getSecKeyList(){

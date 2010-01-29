@@ -100,7 +100,12 @@ public class SendMessageActivity extends Activity {
     	  	pe=true;
         	editor.putString("getting_pass", "0");
         	editor.commit();
-        	sendMessage();
+        	if (GPG.checkPassword(password)){
+        		sendMessage();
+        	}
+        	else{
+        		getPassword();
+        	}
     	  }
     	});
 
