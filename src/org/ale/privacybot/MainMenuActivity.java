@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -60,6 +62,26 @@ public class MainMenuActivity extends Activity {
             	startActivity(km);
             }
         });
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+    	super.onCreateOptionsMenu(menu);
+    	
+    	MenuItem mi = menu.add(0,0,0,"Shell");
+    	mi.setIcon(android.R.drawable.ic_menu_manage);
+
+    	return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+    		case 0:
+    			startActivity(new Intent(this, ShellActivity.class));
+    			return(true);
+    	}
+    	return(super.onOptionsItemSelected(item));
     }
 
     public void launchInstaller(){

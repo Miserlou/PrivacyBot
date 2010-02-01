@@ -17,7 +17,7 @@ import android.preference.PreferenceManager;
 
 public class GPG{
 	
-	static String base = "/data/data/org.ale.privacybot/gpgx --homedir=/data/data/org.ale.privacybot/.gpg ";
+	static String base = "/data/data/org.ale.privacybot/gpgx --homedir=/data/data/org.ale.privacybot/.gpg -v ";
 	
 	public static String execute(String s){
 		
@@ -51,10 +51,50 @@ public class GPG{
 		return "";
 	}
 	
+	public static String publicExecute(String s){
+		
+		String res = "";
+		
+		s = base + s;
+		
+		Process p;
+		try {
+			p = Runtime.getRuntime().exec(s);
+			//p.waitFor();
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			BufferedReader er = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			while ((line = er.readLine()) != null) {
+				  sb.append(line).append("\n");
+				}
+			System.out.println("GPG Error:");
+			res = res + sb.toString();
+			System.out.println(res);
+			sb = new StringBuffer();
+			line = null;
+			while ((line = br.readLine()) != null) {
+			  sb.append(line).append("\n");
+			}
+			String answer = sb.toString();
+			System.out.println("GPG Stdout:");
+			System.out.println(answer);
+			res = res + answer;
+			return res;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Something fucked up. Cgeck your logcat.";
+		}
+		
+	}
+	
 	public static String importKey(String str){
 		// XXX: Note - that allow nonselfsigned thing is a hack. Should be removed
 		// when I can figure out why it thinks self signed keys aren't.
 		String x = base + "--allow-secret-key-import --allow-non-selfsigned-uid --import " + str;
+		//String x = base + "--allow-secret-key-import --always-trust --import " + str;
+		//String x = base + "--armor --import " + str;
 		return execute(x);
 	}
 	
@@ -76,8 +116,10 @@ public class GPG{
 		catch (IOException e) {
 			System.out.println("writing to pb error");
 		} 
-
-		String x = base + "-r " + recipiant + " --passphrase=" + password + " -e " + "/sdcard/pb";
+		
+		//String x = base + "--always-trust --allow-non-selfsigned-uid -r " + recipiant + " --passphrase=" + password + " -e " + "/sdcard/pb";
+		String x = base + "--always-trust -r " + recipiant + " --passphrase=" + password + " -e " + "/sdcard/pb";
+		System.out.println("Executing - " + x);
 		execute(x);
 		pb.delete();
 		return pbg.getAbsolutePath(); 
@@ -131,6 +173,8 @@ public class GPG{
 	
 	public static ArrayList<KeyInfo> getSecKeyList(){
 		
+		getSecKeyListWithoutColons();
+		
 		String[] secar;
 		String bytes;
 		String fprint;
@@ -157,7 +201,15 @@ public class GPG{
 		return al;
 	}
 	
+	public static void getSecKeyListWithoutColons(){
+
+		String x = base + "--list-secret-keys";
+		execute(x);
+
+	}
+	
 	public static ArrayList<KeyInfo> getPubKeyList(){
+		getPubKeyListWithoutColons();
 		
 		String[] secar;
 		String bytes;
@@ -185,6 +237,11 @@ public class GPG{
 		return al;
 	}
 	
+	public static void getPubKeyListWithoutColons(){
+		String x = base + "--list-keys";
+		execute(x);
+	}
+	
 	public static void makeDefault(KeyInfo k, Context c){
 		
 		//can't make pub-keys default
@@ -203,6 +260,7 @@ public class GPG{
 	
 	public static void deleteKey(KeyInfo k, Context c){
 		System.out.println("Deleting " + k.getFingerprint());
+		// XXX: getFingerprint is actually just getting KeyID, which won't work.
 		String x = base + "--batch --yes --delete-secret-and-public-key=" + k.getFingerprint();
 		execute(x);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);

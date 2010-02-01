@@ -32,7 +32,8 @@
 	<string name="sending">\n\n\n\nSending..</string>
 	<string name="privacybot_attached">PrivacyBot for Android is attached</string>
 	<string name="pubkey_attached">My OpenPGP/GPG public key is attached.</string>
-	<string name="unable_to_copy">Unable to move application to SDCard.</string>									
+	<string name="unable_to_copy">Unable to move application to SDCard.</string>
+	<string name="shell_instructions">\n\n\n\n\n\nEnter your arguments. \n./gpgx --homedir=./.gpg -v is affixed to anything entered. \n\n\n</string>										
 	
 		<!-- ***************************
 	     File Manager strings

@@ -166,6 +166,20 @@ public class InstallerActivity extends Activity {
 		}
 	}
 	
+	public void newFile(String destname)
+	{
+		File newasset = new File(destname);
+		try {
+			newasset.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Unable to create " + destname);
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	public void checkInstall(){
 		if(!compareAsset("version.txt")){
 			// This is a fucking HACK
@@ -178,6 +192,14 @@ public class InstallerActivity extends Activity {
 			copyAsset("gpgx.mp3");
 			doCommand("/system/bin/mv", "/data/data/org.ale.privacybot/gpgx.mp3", "/data/data/org.ale.privacybot/gpgx");
 			doCommand("/system/bin/chmod", "777", "/data/data/org.ale.privacybot/gpgx");
+			//newFile("/data/data/org.ale.privacybot/.gpg/pubring.gpg");
+			//doCommand("/system/bin/chmod", "777", "/data/data/org.ale.privacybot/.gpg/pubring.gpg");
+			//newFile("/data/data/org.ale.privacybot/.gpg/secring.gpg");
+			//doCommand("/system/bin/chmod", "777", "/data/data/org.ale.privacybot/.gpg/secring.gpg");
+			//newFile("/data/data/org.ale.privacybot/.gpg/random_seed");
+			//doCommand("/system/bin/chmod", "777", "/data/data/org.ale.privacybot/.gpg/random_seed");
+			//newFile("/data/data/org.ale.privacybot/.gpg/trustdb.gpg");
+			//doCommand("/system/bin/chmod", "777", "/data/data/org.ale.privacybot/.gpg/random_seed");
 			copyAsset("version.txt");
 		}
 	}
