@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
@@ -139,11 +140,13 @@ private class KeyInfoAdapter extends ArrayAdapter<KeyInfo> {
                 if (o != null) {
                         TextView tt = (TextView) v.findViewById(R.id.toptext);
                         TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+                        ImageView iv = (ImageView) v.findViewById(R.id.icon);
                         if (tt != null) {
                               tt.setText(o.getNameCommentEmail());                            }
                         if(bt != null){
                         	  if (!o.getPublic()){
                         		  bt.setText("Secret - " + o.getFingerprint());
+                        		  iv.setImageResource(R.drawable.greenicon);
                         	  }
                         	  else{
                         		  bt.setText(o.getFingerprint());

@@ -51,8 +51,9 @@ public class ShellActivity extends Activity {
     
     private void execCommand(){
     	String s = et.getText().toString();
-    	String res = GPG.publicExecute(s);
-    	tv.setText(res);
+    	if(s!=""){
+	    	String res = GPG.publicExecute(s);
+	    	tv.setText(res);}
     }
 
     }
