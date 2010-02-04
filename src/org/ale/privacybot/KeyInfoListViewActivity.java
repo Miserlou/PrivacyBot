@@ -76,7 +76,7 @@ public class KeyInfoListViewActivity extends ListActivity{
         	  m_keys = GPG.getSecKeyList();
         	  m_keys.addAll(GPG.getPubKeyList());
               //wtf why is this here
-              Thread.sleep(2000);
+              Thread.sleep(500);
             } catch (Exception e) {
             }
             runOnUiThread(returnRes);

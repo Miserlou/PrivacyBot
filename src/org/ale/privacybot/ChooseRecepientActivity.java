@@ -106,7 +106,7 @@ public class ChooseRecepientActivity extends ListActivity{
           try{
         	  m_keys = GPG.getPubKeyList();
               //wtf why is this here
-              Thread.sleep(2000);
+              Thread.sleep(500);
             } catch (Exception e) {
             }
             runOnUiThread(returnRes);
