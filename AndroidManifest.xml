@@ -6,24 +6,25 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application android:icon="@drawable/redicon" android:label="@string/app_name" android:debuggable="true">
         <activity android:name=".MainMenuActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name" 
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
-        <activity android:name=".InstallerActivity" />
-        <activity android:name=".KeyManagementActivity" />
-        <activity android:name=".KeyInfoListViewActivity" />
-        <activity android:name=".TextMenuActivity" />
-        <activity android:name=".EmailMenuActivity" />
-        <activity android:name=".ChooseRecepientActivity" />
-        <activity android:name=".SendMessageActivity" />
-        <activity android:name=".SendKeyOrPbotActivity" />
+        <activity android:name=".InstallerActivity" android:screenOrientation="portrait" />
+        <activity android:name=".KeyManagementActivity" android:screenOrientation="portrait" />
+        <activity android:name=".KeyInfoListViewActivity" android:screenOrientation="portrait" />
+        <activity android:name=".TextMenuActivity" android:screenOrientation="portrait" />
+        <activity android:name=".EmailMenuActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ChooseRecepientActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SendMessageActivity"/>
+        <activity android:name=".SendKeyOrPbotActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".ShellActivity" />
         
-        <activity android:name=".KeyImporterActivity">
+        <activity android:name=".KeyImporterActivity" android:screenOrientation="portrait">
 			<intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                             <category android:name="android.intent.category.DEFAULT" />
@@ -36,7 +37,7 @@
             </intent-filter> 
 		</activity>
 		
-		 <activity android:name=".ViewDecryptedMessageActivity">
+		 <activity android:name=".ViewDecryptedMessageActivity" android:screenOrientation="portrait">
 			<intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                             <category android:name="android.intent.category.DEFAULT" />

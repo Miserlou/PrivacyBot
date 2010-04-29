@@ -35,14 +35,6 @@ public class InstallerActivity extends Activity {
         super.onStart();
         installData();
         
-    	//try {
-		//	Thread.currentThread().sleep(1500);
-		//} catch (InterruptedException e) {
-		//	// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		// }
-    	//finish();
-        //finish();
     }
     
     public void installData(){
@@ -115,6 +107,9 @@ public class InstallerActivity extends Activity {
 		{
 			match = false;
 		}
+		
+		System.out.println("Match is");
+		System.out.println(match);
 		return match;
 	}
 	
