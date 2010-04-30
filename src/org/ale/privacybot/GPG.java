@@ -84,7 +84,7 @@ public class GPG{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "Something fucked up. Cgeck your logcat.";
+			return "Something fucked up. Check your logcat.";
 		}
 		
 	}
@@ -108,6 +108,7 @@ public class GPG{
 		// XXX: Change to ExternalStorageDirectory
 		File pb = new File("/sdcard/pb");
 		File pbg = new File("/sdcard/pb.gpg");
+		File pba = new File("/sdcard/pb.asc");
 		try { 
 			System.out.println("writing to pb");
 			BufferedWriter out = new BufferedWriter(new FileWriter("/sdcard/pb"));
@@ -118,17 +119,24 @@ public class GPG{
 		} 
 		
 		//String x = base + "--always-trust --allow-non-selfsigned-uid -r " + recipiant + " --passphrase=" + password + " -e " + "/sdcard/pb";
-		String x = base + "--always-trust -r " + recipiant + " --passphrase=" + password + " -e " + "/sdcard/pb";
+		String x = base + "--armor --always-trust -r " + recipiant + " --passphrase=" + password + " --armor -e " + "/sdcard/pb";
 		System.out.println("Executing - " + x);
 		execute(x);
 		pb.delete();
-		return pbg.getAbsolutePath(); 
+		return pba.getAbsolutePath(); 
 		
 	}
 	
 	public static String decryptMessage(Uri uri, String password){
-		String x = base + "-passphrase=" + password + " -d " + uri.getPath();
-		return execute(x);
+		//String x = base + "--passphrase=" + password + " -d " + uri.getPath() ;
+		String x = base + "--output /sdcard/asdfffff --batch --passphrase=" + password + " -d " + uri.getPath() ;
+		String resp = execute(x);
+	
+		if(resp == ""){
+			return "GPGERROR";
+		}
+		return resp;
+		
 	}
 	
 	public static boolean checkPassword(String pASSphrase){

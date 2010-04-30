@@ -3,7 +3,9 @@
       package="org.ale.privacybot"
       android:versionCode="1"
       android:versionName="1.0">
+      
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
     <application android:icon="@drawable/redicon" android:label="@string/app_name" android:debuggable="true">
         <activity android:name=".MainMenuActivity"
                   android:label="@string/app_name" 
@@ -37,16 +39,24 @@
             </intent-filter> 
 		</activity>
 		
-		 <activity android:name=".ViewDecryptedMessageActivity" android:screenOrientation="portrait">
+		 <activity android:name=".ViewDecryptedMessageActivity" 
+		 		   android:label="PrivacyBot Decrypt">
 			<intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                             <category android:name="android.intent.category.DEFAULT" />
                             <category android:name="android.intent.category.BROWSABLE" />
                             <data android:scheme="file" /> 
-                		    <data android:mimeType="application/pgp-encrypted" />>
-                			<!-- <data android:mimeType="*/*"/>--> 
-                			<!--<data android:pathPattern=".*\\.gpg" />-->
-            </intent-filter> 
+                		    <data android:mimeType="application/pgp-encrypted" />
+              	</intent-filter>
+	            <intent-filter>
+	                <action android:name="android.intent.action.VIEW" />
+	                <category android:name="android.intent.category.DEFAULT"/>
+	                <data android:mimeType="text/*"/>
+	            </intent-filter>
+                <intent-filter>
+                			<action android:name="org.ale.privacyBot.intent.DECRYPT" />
+            </intent-filter>
+                		    
 		</activity>
         
 

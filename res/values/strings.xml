@@ -34,6 +34,7 @@
 	<string name="pubkey_attached">My OpenPGP/GPG public key is attached.</string>
 	<string name="unable_to_copy">Unable to move application to SDCard.</string>
 	<string name="shell_instructions">\n\n\n\n\n\nEnter your arguments. \n./gpgx --homedir=./.gpg -v is affixed to anything entered. \n\n\n</string>										
+	<string name="dec_error">Decryption error.</string>
 	
 		<!-- ***************************
 	     File Manager strings
