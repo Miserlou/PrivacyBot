@@ -2,6 +2,7 @@ package org.ale.privacybot;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -129,9 +130,40 @@ public class GPG{
 	
 	public static String decryptMessage(Uri uri, String password){
 		//String x = base + "--passphrase=" + password + " -d " + uri.getPath() ;
-		String x = base + "--output /sdcard/asdfffff --batch --passphrase=" + password + " -d " + uri.getPath() ;
+		String x = base + "--output /sdcard/outfile --batch --passphrase=" + password + " -d " + uri.getPath() ;
 		String resp = execute(x);
-	
+		
+	    StringBuilder contents = new StringBuilder();
+	    
+	    File out = new File("/sdcard/outfile");
+	    try {
+			out.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    try {
+	      BufferedReader input =  new BufferedReader(new FileReader(out));
+	      try {
+	        String line = null;
+	        while (( line = input.readLine()) != null){
+	          contents.append(line);
+	          contents.append(System.getProperty("line.separator"));
+	        }
+	      }
+	      finally {
+	        input.close();
+	      }
+	    }
+	    catch (IOException ex){
+	      ex.printStackTrace();
+	    }
+	    
+	    resp = contents.toString();
+	    
+	    out.delete();
+
 		if(resp == ""){
 			return "GPGERROR";
 		}

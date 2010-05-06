@@ -5,7 +5,7 @@
     <string name="pbt">\n\nPrivacyBot\n</string>
     <string name="installing">\n\nPlease wait while data is installed. This may take some time, but it will only happen this one time. \n\nThank you for your patience!</string>
 	<string name="importing">\n\nPlease wait while your key is being imported!\n\n Using the following keyfile: \n</string>
-	<string name="install_done">\n\n\n\n\nOkay, Done!</string>
+	<string name="install_done">\n\n\n\n\nOkay, Done!\n\nPlease press back.</string>
 	<string name="button_txt">Text Messages</string>
 	<string name="button_email">Email</string>
 	<string name="button_manage_keys">Key Management</string>

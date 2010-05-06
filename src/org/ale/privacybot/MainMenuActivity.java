@@ -30,14 +30,22 @@ public class MainMenuActivity extends Activity {
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String data = prefs.getString("binary_data", "0");
         
-        if(data != "1"){
-        	launchInstaller();
-        }
+        System.out.println("binary data is " + data);
+
     }
     
     @Override
     public void onStart(){
     	super.onStart();
+    	
+    	String data = prefs.getString("binary_data", "0");
+    	System.out.println("binary data is " + data);
+    	
+        if(data == "0"){
+        	System.out.println("Luanchin instarlre");
+        	launchInstaller();
+        }
+        
     	Button b1 = (Button)findViewById(R.id.txt);
     	Button b2 = (Button)findViewById(R.id.email);
     	Button b3 = (Button)findViewById(R.id.keymanager);
