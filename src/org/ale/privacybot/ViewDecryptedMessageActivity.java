@@ -10,6 +10,7 @@ import java.io.OutputStream;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewDecryptedMessageActivity extends Activity {
 	Uri uri;
@@ -86,6 +88,8 @@ public class ViewDecryptedMessageActivity extends Activity {
     	editor.putString("getting_pass", "1");
     	editor.commit();
     	
+    	final Context c = getBaseContext();
+    	
     	LayoutInflater li = LayoutInflater.from(this);
     	final View tEV = li.inflate(R.layout.password, null);
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -105,19 +109,23 @@ public class ViewDecryptedMessageActivity extends Activity {
         	editor.putString("getting_pass", "0");
         	editor.commit();
         	
-        	if(GPG.checkPassword(password)){
-	        	String dec = GPG.decryptMessage(uri, password);
-	        	TextView tv = (TextView) findViewById(R.id.decrypted);
-	        	if(dec == "GPGERROR"){		// Context hack
-	        		tv.setText(getString(R.string.dec_error));
-	        	}
-	        	else{
+        	if(password.length() == 0 || password == null){
+        		getPassword();
+        	}
+        	
+	        String dec = GPG.decryptMessage(uri, password);
+	        EditText tv = (EditText) findViewById(R.id.decrypted);
+	        if(dec == "GPGERROR"){		// Context hack
+	        	tv.setText(getString(R.string.dec_error));
+	        }
+	        else if(dec == "GPGERRORBADPASSWORD"){
+	        	Toast.makeText(c, getString(R.string.bad_pass), Toast.LENGTH_LONG).show();
+	        	getPassword();}
+	        else{
 	        		tv.setText(dec);}
 	        	}
-	        else{
-	        	getPassword();
-	        }
-    	  }
+
+    	  
     	});
 
     	alert.show();

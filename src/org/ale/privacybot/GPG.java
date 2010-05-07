@@ -131,7 +131,42 @@ public class GPG{
 	public static String decryptMessage(Uri uri, String password){
 		//String x = base + "--passphrase=" + password + " -d " + uri.getPath() ;
 		String x = base + "--output /sdcard/outfile --batch --passphrase=" + password + " -d " + uri.getPath() ;
-		String resp = execute(x);
+		String answer = null;
+		
+		Process p;
+		try {
+			p = Runtime.getRuntime().exec(x);
+			//p.waitFor();
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			BufferedReader er = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			while ((line = er.readLine()) != null) {
+				  sb.append(line).append("\n");
+				}
+			System.out.println("GPG Error:");
+			String sbo = sb.toString();
+			System.out.println(sbo);
+			if(sbo.contains("bad passphrase") || sbo.contains("unusable public key") || sbo.contains("failed") || sbo.contains("skipped")){
+				return "GPGERRORBADPASSWORD";
+			}
+			sb = new StringBuffer();
+			line = null;
+			while ((line = br.readLine()) != null) {
+			  sb.append(line).append("\n");
+			}
+			answer = sb.toString();
+			System.out.println("GPG Stdout:");
+			System.out.println(answer);
+			if(answer.contains("bad passphrase") || answer.contains("unusable public key")|| sbo.contains("failed") || sbo.contains("skipped")){
+				System.out.println("Bad password");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String resp = answer;
 		
 	    StringBuilder contents = new StringBuilder();
 	    
@@ -174,7 +209,10 @@ public class GPG{
 	public static boolean checkPassword(String pASSphrase){
 		
 		// Is there a better way to check for this?
-		String s = base + "--sign --dry-run --passphrase=" + pASSphrase;
+		String s = base + "--batch --sign --dry-run --passphrase=" + pASSphrase;
+		
+		System.out.println("Checking pass..");
+		
 		Process p;
 		try {
 			p = Runtime.getRuntime().exec(s);
@@ -201,13 +239,14 @@ public class GPG{
 			System.out.println("GPG Stdout:");
 			System.out.println(answer);
 			if(answer.contains("bad passphrase") || answer.contains("unusable public key")|| sbo.contains("failed") || sbo.contains("skipped")){
+				System.out.println("Bad password");
 				return false;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("Good password");
 		return true;
 	}
 	

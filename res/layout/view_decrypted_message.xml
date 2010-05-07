@@ -4,17 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
+    android:padding="30dip"
     >
-    <ScrollView android:id="@+id/textAreaScroller"
-    android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-	<TextView  
+	<EditText
+		android:cursorVisible="false"
+		android:typeface="serif"
 	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content" 
+	    android:layout_height="fill_parent" 
 	    android:text="@string/decrypting"
 	    android:id="@+id/decrypted"
 	    android:textAppearance="?android:attr/textAppearanceMedium"
 	    android:gravity="center"
 	    />
-</ScrollView>
 </LinearLayout>
